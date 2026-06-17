@@ -1,1 +1,20 @@
 to_be_ignored.txt
+
+# Virtual Environment
+venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# PyCharm
+.idea/
+
+# pytest cache
+.pytest_cache/
+
+# macOS
+.DS_Store
