@@ -1,51 +1,84 @@
-def ASSIGNMENT(new_list, i, old_list, j):
-    new_list[i] = old_list[j]
+"""
 
+Implementation of the Merge Sort algorithm.
 
-def mergeSort(list_to_sort_by_merge):
-    if (
-        len(list_to_sort_by_merge) > 1
-        and not len(list_to_sort_by_merge) < 1
-        and len(list_to_sort_by_merge) != 0
-    ):
-        mid = len(list_to_sort_by_merge) // 2
-        left = list_to_sort_by_merge[:mid]
-        right = list_to_sort_by_merge[mid:]
+Merge Sort is a recursive divide-and-conquer algorithm:
 
-        mergeSort(left)
-        mergeSort(right)
+1. Split the list into two halves.
 
-        l = 0
-        r = 0
-        i = 0
+2. Recursively sort both halves.
 
-        while l < len(left) and r < len(right):
-            if left[l] <= right[r]:
-                ASSIGNMENT(new_list=list_to_sort_by_merge, i=i, old_list=left, j=l)
-                l += 1
-            else:
-                ASSIGNMENT(new_list=list_to_sort_by_merge, i=i, old_list=right, j=r)
-                r += 1
-            i += 1
+3. Merge the sorted halves back together.
 
-        while l < len(left):
-            list_to_sort_by_merge[i] = left[l]
-            l += 1
-            i += 1
+The sorting is performed in-place on the given list.
 
-        while r < len(right):
-            list_to_sort_by_merge[i] = right[r]
-            r += 1
-            i += 1
-
-
+"""
 import matplotlib.pyplot as plt
 
+
+def assign(target_list, target_index, source_list, source_index):
+    """
+
+    Copies an element from a source list into a target list.
+
+    """
+    target_list[target_index] = source_list[source_index]
+
+
+def merge_sort(values):
+    """
+
+    Sorts a list using the Merge Sort algorithm.
+
+    Args:
+
+        values: The list to be sorted.
+
+    """
+    if (len(values) < 1):
+        return 
+
+    mid = len(values) // 2
+    left = values[:mid]
+    right = values[mid:]
+
+    merge_sort(left_half)
+    merge_sort(right_half)
+
+    left_index = 0
+    right_index = 0
+    merged_index = 0
+
+    while left_index < len(left_half) and right_index < len(right_half):
+
+        if left_half[left_index] <= right_half[right_index]:
+            assign(values, merged_index, left_half, left_index)
+            left_index += 1
+
+        else:
+            assign(values, merged_index, right_half, right_index)
+            right_index += 1
+        merged_index += 1
+
+    while left_index < len(left_half):
+        assign(values, merged_index, left_half, left_index)
+        left_index += 1
+        merged_index += 1
+
+    while right_index < len(right_half):
+        assign(values, merged_index, right_half, right_index)
+        right_index += 1
+        merged_index += 1
+
+
 my_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
+
 x = range(len(my_list))
 plt.plot(x, my_list)
 plt.show()
-mergeSort(my_list)
+
+merge_sort(my_list)
+
 x = range(len(my_list))
 plt.plot(x, my_list)
 plt.show()
