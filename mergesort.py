@@ -36,11 +36,11 @@ def merge_sort(values):
 
     """
     if (len(values) < 1):
-        return 
+        return
 
     mid = len(values) // 2
-    left = values[:mid]
-    right = values[mid:]
+    left_half = values[:mid]
+    right_half = values[mid:]
 
     merge_sort(left_half)
     merge_sort(right_half)
@@ -73,12 +73,20 @@ def merge_sort(values):
 
 my_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
 
-x = range(len(my_list))
-plt.plot(x, my_list)
-plt.show()
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 4))
+
+ax1.bar(range(len(my_list)), my_list, color="steelblue")
+ax1.set_title("Before Sorting")
+ax1.set_xlabel("Index")
+ax1.set_ylabel("Value")
 
 merge_sort(my_list)
 
-x = range(len(my_list))
-plt.plot(x, my_list)
+ax2.bar(range(len(my_list)), my_list, color="steelblue")
+ax2.set_title("After Sorting")
+ax2.set_xlabel("Index")
+ax2.set_ylabel("Value")
+
+plt.suptitle("Merge Sort: Before and After", fontsize=14)
+plt.tight_layout()
 plt.show()
